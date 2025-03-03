@@ -84,3 +84,22 @@ export async function getOrders() {
         throw new Error("Failed to fetch orders");
     }
 }
+// TODO: Run seed script elsewhere
+// async function seedDatabase() {
+//     try {
+//         console.log("🌱 Seeding database...");
+//         // Clear the table (optional: only for dev environment)
+//         await db.delete(products);
+
+//         // Insert mock products
+//         for (const product of mockProducts) {
+//             await db.insert(products).values(product);
+//         }
+//         console.log("✅ Database seeding complete!");
+//     } catch (error) {
+//         console.error("❌ Error seeding database:", error);
+//     } finally {
+//         process.exit();
+//     }
+// }
+// await seedDatabase()
