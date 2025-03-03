@@ -1,10 +1,12 @@
 import { z } from 'zod';
 import { baseProcedure, createTRPCRouter } from '../init';
+import { mockProducts } from '../../../constants';
+import { getProducts } from '../../../actions';
 export const appRouter = createTRPCRouter({
-  hello: baseProcedure
-    .query((opts) => {
+  getProducts: baseProcedure
+    .query(async (opts) => {
       return {
-        greeting: `hello`,
+        products: await getProducts(),
       };
     }),
 });

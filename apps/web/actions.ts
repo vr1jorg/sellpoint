@@ -1,5 +1,4 @@
 'use server';
-
 import { db } from './db';
 import { products } from './schema';
 import { eq } from 'drizzle-orm';
@@ -13,7 +12,7 @@ export async function editProduct(productId: string, formData: FormData) {
     try {
         await db.update(products)
             .set({ name, category, quantity, price, updatedAt: new Date() })
-            .where(eq(products.id, Number(productId)));
+            .where(eq(products.id, productId));
 
         console.log(`Product with ID ${productId} updated successfully`);
     } catch (error) {
@@ -37,9 +36,20 @@ export async function createProduct(formData: FormData) {
 
 export async function deleteProduct(productId: string) {
     try {
-        await db.delete(products).where(eq(products.id, Number(productId)));
+        await db.delete(products).where(eq(products.id, productId));
         console.log(`Product with ID ${productId} deleted successfully`);
     } catch (error) {
         console.error('Failed to delete product:', error);
     }
 }
+
+export async function getProducts() {
+    try {
+        const productList = await db.select().from(products)
+        return productList
+    } catch (error) {
+        console.error('Failed to get products:', error);
+        throw new Error("Failed to fetch products");
+    }
+}
+
