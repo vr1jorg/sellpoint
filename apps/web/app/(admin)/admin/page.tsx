@@ -1,3 +1,4 @@
+import AddMockProduct from '../../_components/add-mock-product';
 import OrdersTable from '../../_components/orders-table';
 import ProductTable from '../../_components/product-table';
 import { trpc } from '../../_trpc/server';
@@ -5,7 +6,6 @@ import { trpc } from '../../_trpc/server';
 export default async function AdminPage() {
     const productsRequest = await trpc.getProducts();
     const ordersRequest = await trpc.getOrders();
-    console.log(productsRequest);
 
     const [{ products }, { orders }] = await Promise.all([productsRequest, ordersRequest])
 

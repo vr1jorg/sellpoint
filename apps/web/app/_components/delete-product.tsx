@@ -1,14 +1,15 @@
 "use client";
 import { useState } from "react";
 import { DeleteProductProps } from "../../types";
+import { deleteProduct } from "../../actions";
 
 export default function DeleteProduct({ id }: DeleteProductProps) {
     const [isOpen, setIsOpen] = useState(false);
+    const deleteProductWithId = deleteProduct.bind(null, id);
 
     const handleDelete = async () => {
         try {
-            // e.g., call an API or server action:
-            // await deleteProductAction(id);
+            await deleteProductWithId();
             console.log("Product deleted:", id);
             setIsOpen(false);
         } catch (error) {

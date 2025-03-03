@@ -1,9 +1,10 @@
 'use server';
-import { asc, eq } from 'drizzle-orm';
+import { asc, desc, eq } from 'drizzle-orm';
 import { db } from './db';
 import { products, orders } from './schema';
 import { Product } from './types';
 import { revalidatePath } from 'next/cache';
+import { mockProducts } from './constants';
 
 export async function editProduct(productId: string, formData: FormData) {
     const name = formData.get('name') as string;
@@ -29,18 +30,20 @@ export async function createProduct(formData: FormData) {
     const category = formData.get('category') as string;
     const quantity = Number(formData.get('quantity'));
     const price = parseFloat(formData.get('price') as string);
+    const imageUrl = "https://assets.sutori.com/user-uploads/image/e0ff22a7-d61e-4ce9-995e-9f360cb7ed87/9ffe9e58d7cea02d981530dc826079f3.jpeg"
 
     try {
-        await db.insert(products).values({ name, category, quantity, price });
+        await db.insert(products).values({ name, category, quantity, price, imageUrl });
         console.log('Product created successfully');
+        revalidatePath('/admin')
     } catch (error) {
         console.error('Failed to create product:', error);
     }
 }
 
-export async function deleteProduct(productId: string) {
+export async function deleteProduct(productId: number) {
     try {
-        await db.delete(products).where(eq(products.id, parseInt(productId)));
+        await db.delete(products).where(eq(products.id, productId));
         revalidatePath('/admin')
         console.log(`Product with ID ${productId} deleted successfully`);
     } catch (error) {
@@ -75,10 +78,11 @@ export async function createOrder(cart: Product[]) {
 
 export async function getOrders() {
     try {
-        const orderList = await db.select().from(orders).orderBy(asc(orders.id))
+        const orderList = await db.select().from(orders).orderBy(desc(orders.id))
         return orderList
     } catch (error) {
         console.error('Failed to get orders:', error);
         throw new Error("Failed to fetch orders");
     }
 }
+
