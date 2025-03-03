@@ -1,0 +1,34 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1740984872823,
+      "tag": "0000_messy_multiple_man",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1740984913017,
+      "tag": "0001_watery_omega_flight",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1740988728053,
+      "tag": "0002_fuzzy_power_pack",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1740993670244,
+      "tag": "0003_cloudy_dracula",
+      "breakpoints": true
+    }
+  ]
+}

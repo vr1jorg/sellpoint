@@ -4,7 +4,7 @@ import { ButtonProps, ButtonType, ButtonVariant } from "../../types";
 export default function Button({
     variant = ButtonVariant.Primary,
     type = ButtonType.Button,
-    onClick,
+    onClick = () => { },
     children
 }: ButtonProps) {
 

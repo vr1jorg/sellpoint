@@ -2,8 +2,8 @@ import "../../globals.css";
 import "@repo/ui/styles.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Navbar from "../_components/navbar";
 import { TRPCProvider } from "../_trpc/client"
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +21,7 @@ export default function RootLayout({
         <TRPCProvider>
             <html lang="en">
                 <body className={inter.className}>
-                    <Navbar />
+                    <Link className="py-2 px-3 block underline" href="/">Go back to store</Link>
                     {children}
                 </body>
             </html>
