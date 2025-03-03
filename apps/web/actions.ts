@@ -4,7 +4,6 @@ import { db } from './db';
 import { products, orders } from './schema';
 import { Product } from './types';
 import { revalidatePath } from 'next/cache';
-import { mockProducts } from './constants';
 
 export async function editProduct(productId: string, formData: FormData) {
     const name = formData.get('name') as string;
@@ -17,7 +16,7 @@ export async function editProduct(productId: string, formData: FormData) {
             .set({ name, category, quantity, price, updatedAt: new Date() })
             .where(eq(products.id, parseInt(productId)));
 
-        revalidatePath('/admin')
+        revalidatePath('/')
 
         console.log(`Product with ID ${productId} updated successfully`);
     } catch (error) {
@@ -35,7 +34,7 @@ export async function createProduct(formData: FormData) {
     try {
         await db.insert(products).values({ name, category, quantity, price, imageUrl });
         console.log('Product created successfully');
-        revalidatePath('/admin')
+        revalidatePath('/')
     } catch (error) {
         console.error('Failed to create product:', error);
     }
@@ -44,7 +43,7 @@ export async function createProduct(formData: FormData) {
 export async function deleteProduct(productId: number) {
     try {
         await db.delete(products).where(eq(products.id, productId));
-        revalidatePath('/admin')
+        revalidatePath('/')
         console.log(`Product with ID ${productId} deleted successfully`);
     } catch (error) {
         console.error('Failed to delete product:', error);
@@ -85,4 +84,3 @@ export async function getOrders() {
         throw new Error("Failed to fetch orders");
     }
 }
-
