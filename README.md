@@ -1,4 +1,4 @@
-# Sellpoint: Turborepo with Next.js App Router, Tailwind, tRPC, DrizzleORM, PostgrespSQL, and Docker
+# Sellpoint: Turborepo with Next.js App Router, Tailwind, tRPC, DrizzleORM, PostgreSQL, and Docker
 
 This README explains the scripts and commands for managing your PostgreSQL database within the Sellhub e-commerce platform.
 
